@@ -1,0 +1,143 @@
+<view class="page">
+  <!-- ============ hub 模式 ============ -->
+  <block wx:if="{{mode === 'hub'}}">
+    <view class="hero card">
+      <view class="hero-icon">🍻</view>
+      <view class="hero-title">饭局点菜</view>
+      <view class="hero-sub">创建饭局邀请好友一起点菜，各自下单、各自结算</view>
+      <button class="btn-primary hero-btn" bindtap="createParty">＋ 发起饭局</button>
+    </view>
+
+    <view class="section-title">我发起的饭局</view>
+    <view wx:if="{{loading}}" class="loading-tip">加载中...</view>
+    <empty-state wx:elif="{{parties.length === 0}}" icon="🍽️" text="还没有进行中的饭局\n快发起一个吧" />
+    <view wx:else class="party-list">
+      <view class="party-item card" wx:for="{{parties}}" wx:key="_id" data-id="{{item._id}}" bindtap="onPartyTap">
+        <view class="party-info">
+          <view class="party-title-row">
+            <text class="party-title">{{item.title}}</text>
+            <text class="party-status {{item.status}}">{{item.statusText}}</text>
+          </view>
+          <view class="party-meta">
+            <text>{{item.participants.length}} 人参与</text>
+            <text wx:if="{{item.timeText}}">{{item.timeText}}</text>
+          </view>
+        </view>
+        <text class="arrow">›</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- ============ room 模式 ============ -->
+  <block wx:else>
+    <view wx:if="{{loading && !party}}" class="loading-tip">加载中...</view>
+
+    <block wx:elif="{{party}}">
+      <!-- 饭局头部 -->
+      <view class="room-head card">
+        <view class="room-title-row">
+          <text class="room-title">{{party.title}}</text>
+          <text class="party-status {{party.status}}">{{party.statusText}}</text>
+        </view>
+        <button class="share-btn-plain" open-type="share">📣 邀请好友一起点菜</button>
+        <view class="members">
+          <view class="member" wx:for="{{party.participants}}" wx:key="openid">
+            <image class="member-avatar" src="{{item.avatarUrl}}" mode="aspectFill" />
+            <text class="member-name">{{item.nickName}}</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 状态提示 -->
+      <view wx:if="{{party.status === 'ordered'}}" class="status-banner">✅ 已有人下单，可在订单页查看详情</view>
+      <view wx:elif="{{party.status === 'closed'}}" class="status-banner gray">饭局已结束</view>
+
+      <!-- 菜品分组（所有人可见） -->
+      <view class="section-title">已点菜品（{{totalCount}} 份）</view>
+      <empty-state wx:if="{{groups.length === 0}}" icon="🥘" text="还没有人加菜\n点击下方「加菜」开始点菜" />
+      <view wx:else class="groups">
+        <view class="group card" wx:for="{{groups}}" wx:for-item="group" wx:for-index="gidx" wx:key="openid">
+          <view class="group-head">
+            <image class="group-avatar" src="{{group.avatarUrl}}" mode="aspectFill" />
+            <text class="group-name">{{group.name}}</text>
+            <text class="group-count">{{group.count}} 份</text>
+          </view>
+          <view
+            class="group-item"
+            wx:for="{{group.items}}"
+            wx:for-item="dish"
+            wx:for-index="didx"
+            wx:key="_id"
+          >
+            <image class="dish-cover" src="{{dish.recipeCover}}" mode="aspectFill" lazy-load="{{true}}" />
+            <view class="dish-info">
+              <text class="dish-title">{{dish.recipeTitle}} × {{dish.quantity}}</text>
+              <text wx:if="{{dish.remark}}" class="dish-remark">📝 {{dish.remark}}</text>
+            </view>
+            <view
+              wx:if="{{canEdit && dish.addedBy === myOpenid}}"
+              class="dish-del"
+              data-gidx="{{gidx}}"
+              data-didx="{{didx}}"
+              catchtap="onRemoveCartItem"
+            >✕</view>
+          </view>
+        </view>
+      </view>
+
+      <view class="bottom-space"></view>
+
+      <!-- 底部操作 -->
+      <view class="footer">
+        <!-- 参与者：加菜 + 提交自己的订单 -->
+        <view wx:if="{{canEdit && !isHost}}" class="btn-plain add-dish-btn" bindtap="openPicker">＋ 加菜</view>
+        <view wx:if="{{canEdit && !isHost && myCount > 0}}" class="btn-primary order-btn" bindtap="submitOrder">提交我的订单（{{myCount}}）</view>
+        <!-- 发起人：仅结束饭局 -->
+        <view wx:if="{{isHost && party.status !== 'closed'}}" class="btn-primary close-party-btn" bindtap="closeParty">结束饭局</view>
+      </view>
+
+      <!-- 创建饭局后的分享引导弹窗 -->
+      <view wx:if="{{showShareGuide}}" class="mask" bindtap="closeShareGuide">
+        <view class="share-guide-panel" catchtap="noop">
+          <view class="share-guide-icon">🎉</view>
+          <view class="share-guide-title">饭局创建成功！</view>
+          <view class="share-guide-sub">快分享给好友，邀请他们一起点菜吧</view>
+          <button class="btn-primary share-guide-btn" open-type="share" bindtap="closeShareGuide">立即分享给好友</button>
+          <view class="share-guide-skip" bindtap="closeShareGuide">稍后再说</view>
+        </view>
+      </view>
+
+      <!-- 加菜弹层：共享发起人的菜单 -->
+      <view wx:if="{{showPicker}}" class="mask" bindtap="closePicker">
+        <view class="picker-panel" catchtap="noop">
+          <view class="picker-head">
+            <text class="picker-title">{{hostName}} 的菜单</text>
+            <view class="picker-close" bindtap="closePicker">✕</view>
+          </view>
+          <scroll-view class="picker-list" scroll-y>
+            <view wx:if="{{pickerLoading}}" class="loading-tip">加载中...</view>
+            <empty-state wx:elif="{{pickerList.length === 0}}" text="发起人还没有创建菜谱" />
+            <block wx:else>
+              <view
+                class="picker-item"
+                wx:for="{{pickerList}}"
+                wx:key="_id"
+                data-id="{{item._id}}"
+                bindtap="onPickRecipe"
+              >
+                <image class="picker-cover" src="{{item.coverImage}}" mode="aspectFill" lazy-load="{{true}}" />
+                <view class="picker-info">
+                  <text class="picker-name">{{item.title}}</text>
+                  <text class="picker-meta">{{item.difficulty ? difficultyLabels[item.difficulty] : ''}} · {{item.cookTime}}分钟</text>
+                </view>
+                <view class="picker-add">＋</view>
+              </view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+    </block>
+
+    <empty-state wx:else text="饭局不存在或已结束" />
+  </block>
+</view>

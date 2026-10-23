@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/kitchen/kitchen",
+    "pages/order-list/order-list",
+    "pages/profile/profile",
+    "pages/recipe-detail/recipe-detail",
+    "pages/recipe-edit/recipe-edit",
+    "pages/category-manage/category-manage",
+    "pages/cart/cart",
+    "pages/order-detail/order-detail",
+    "pages/dinner-party/dinner-party",
+    "pages/match/match"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#FF6B35",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "智味菜谱",
+    "backgroundColor": "#F7F8FA",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#FF6B35",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/kitchen/kitchen",
+        "text": "厨房"
+      },
+      {
+        "pagePath": "pages/order-list/order-list",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

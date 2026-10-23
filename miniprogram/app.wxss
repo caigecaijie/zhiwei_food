@@ -1,0 +1,71 @@
+/**app.wxss 全局样式**/
+page {
+  --primary: #FF6B35;
+  --primary-light: #FFF1E8;
+  --primary-deep: #E55520;
+  --text-main: #333333;
+  --text-sub: #999999;
+  --bg: #F7F8FA;
+  --danger: #E64340;
+  --success: #07C160;
+  background: var(--bg);
+  color: var(--text-main);
+  font-size: 28rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  text-align: center;
+  padding: 20rpx 0;
+}
+
+.btn-primary.disabled {
+  opacity: 0.5;
+}
+
+.btn-plain {
+  border: 2rpx solid var(--primary);
+  color: var(--primary);
+  border-radius: 999rpx;
+  font-size: 30rpx;
+  text-align: center;
+  padding: 18rpx 0;
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 20rpx;
+  color: var(--primary);
+  background: var(--primary-light);
+  border-radius: 6rpx;
+  padding: 4rpx 12rpx;
+  margin-right: 12rpx;
+}
+
+.divider {
+  height: 2rpx;
+  background: #F0F0F0;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  margin: 24rpx 0 16rpx;
+}
+
+.loading-tip {
+  text-align: center;
+  color: var(--text-sub);
+  padding: 40rpx 0;
+  font-size: 26rpx;
+}

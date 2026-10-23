@@ -1,0 +1,18 @@
+<view class="rc-card" bindtap="onTap">
+  <view class="rc-cover">
+    <image wx:if="{{recipe.coverImage}}" src="{{recipe.coverImage}}" mode="aspectFill" class="rc-img" lazy-load="{{true}}" />
+    <view wx:else class="rc-placeholder">🍳</view>
+  </view>
+  <view class="rc-body">
+    <view class="rc-title">{{recipe.title}}</view>
+    <view class="rc-desc" wx:if="{{recipe.description}}">{{recipe.description}}</view>
+    <view class="rc-meta">
+      <text wx:if="{{recipe.cookTime}}" class="rc-meta-item">⏱ {{recipe.cookTime}}分钟</text>
+      <text wx:if="{{difficultyLabel}}" class="rc-meta-item">🔥 {{difficultyLabel}}</text>
+    </view>
+    <view class="rc-tags" wx:if="{{recipe.tags.length > 0}}">
+      <text class="rc-tag" wx:for="{{recipe.tags}}" wx:for-item="tag" wx:key="*this">{{tag}}</text>
+    </view>
+  </view>
+  <view wx:if="{{showAdd}}" class="rc-add" catchtap="onAdd">＋</view>
+</view>

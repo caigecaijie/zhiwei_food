@@ -1,0 +1,141 @@
+<view class="page">
+  <!-- 封面 -->
+  <view class="section">
+    <view class="cover-box">
+      <block wx:if="{{form.coverImage}}">
+        <image class="cover-img" src="{{form.coverImage}}" mode="aspectFill" bindtap="chooseCover" />
+        <view class="cover-del" catchtap="removeCover">×</view>
+      </block>
+      <view wx:else class="cover-add" bindtap="chooseCover">
+        <text class="cover-add-icon">📷</text>
+        <text>添加封面图</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 基本信息 -->
+  <view class="section">
+    <view class="section-title">基本信息</view>
+    <view class="field">
+      <text class="field-label">菜名</text>
+      <input class="field-input" placeholder="例如：番茄炒蛋" value="{{form.title}}" bindinput="onTitleInput" maxlength="30" />
+    </view>
+    <view class="field col">
+      <text class="field-label">简介</text>
+      <textarea class="field-textarea" placeholder="一句话介绍这道菜（选填）" value="{{form.description}}" bindinput="onDescInput" maxlength="200" auto-height />
+    </view>
+    <picker class="field category-picker" range="{{categoryNames}}" value="{{selectedCategoryIndex >= 0 ? selectedCategoryIndex : 0}}" bindchange="onCategoryChange">
+      <text class="field-label">分类</text>
+      <view class="field-value {{selectedCategoryName ? '' : 'placeholder'}}">
+        {{selectedCategoryName || '请选择分类'}}
+        <text class="picker-arrow">›</text>
+      </view>
+    </picker>
+    <view class="row-2">
+      <view class="cell">
+        <view class="cell-label">用时(分)</view>
+        <input class="cell-input" type="number" value="{{form.cookTime}}" bindinput="onCookTimeInput" />
+      </view>
+      <view class="cell">
+        <view class="cell-label">份数</view>
+        <input class="cell-input" type="number" value="{{form.servings}}" bindinput="onServingsInput" />
+      </view>
+    </view>
+    <view class="field col">
+      <view class="field-label">难度</view>
+      <view class="stars">
+        <text
+          wx:for="{{[1, 2, 3, 4, 5]}}"
+          wx:key="*this"
+          class="star {{form.difficulty >= item ? 'on' : ''}}"
+          data-v="{{item}}"
+          bindtap="onDifficultyTap"
+        >★</text>
+        <text class="difficulty-label">{{difficultyLabels[form.difficulty]}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 食材清单 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">食材清单</view>
+      <view class="add-row" bindtap="addIngredient">＋ 添加</view>
+    </view>
+    <view class="ing-row" wx:for="{{form.ingredients}}" wx:key="_k">
+      <input class="ing-name" placeholder="食材名" value="{{item.name}}" data-idx="{{index}}" data-field="name" bindinput="onIngredientInput" />
+      <input class="ing-amount" placeholder="用量" value="{{item.amount}}" data-idx="{{index}}" data-field="amount" bindinput="onIngredientInput" />
+      <picker class="ing-unit" range="{{units}}" data-idx="{{index}}" bindchange="onUnitChange">
+        <view class="unit-value {{item.unit ? '' : 'placeholder'}}">{{item.unit || '单位'}}</view>
+      </picker>
+      <view wx:if="{{form.ingredients.length > 1}}" class="row-del" data-idx="{{index}}" catchtap="removeIngredient">✕</view>
+    </view>
+  </view>
+
+  <!-- 制作步骤 -->
+  <view class="section">
+    <view class="section-header">
+      <view class="section-title">制作步骤</view>
+      <view class="add-row" bindtap="addStep">＋ 添加</view>
+    </view>
+    <view class="step-row" wx:for="{{form.steps}}" wx:key="_k">
+      <view class="step-no">{{index + 1}}</view>
+      <view class="step-body">
+        <textarea class="step-text" placeholder="描述这一步的做法..." value="{{item.text}}" data-idx="{{index}}" bindinput="onStepInput" auto-height maxlength="500" />
+        <view class="step-img-box" wx:if="{{item.image}}">
+          <image class="step-img" src="{{item.image}}" mode="aspectFill" />
+          <view class="step-img-del" data-idx="{{index}}" catchtap="removeStepImage">×</view>
+        </view>
+        <view wx:else class="step-img-add" data-idx="{{index}}" bindtap="chooseStepImage">📷 添加图片（可选）</view>
+      </view>
+      <view wx:if="{{form.steps.length > 1}}" class="row-del" data-idx="{{index}}" catchtap="removeStep">✕</view>
+    </view>
+  </view>
+
+  <!-- 小贴士 -->
+  <view class="section">
+    <view class="section-title">小贴士</view>
+    <textarea class="field-textarea full" placeholder="烹饪技巧、注意事项（选填）" value="{{form.tips}}" bindinput="onTipsInput" maxlength="200" auto-height />
+  </view>
+
+  <!-- 标签 -->
+  <view class="section">
+    <view class="section-title">标签（可多选）</view>
+    <view class="tag-group-label">口味</view>
+    <view class="tags">
+      <view
+        wx:for="{{tasteTags}}"
+        wx:key="*this"
+        class="chip {{tagMap[item] ? 'on' : ''}}"
+        data-tag="{{item}}"
+        bindtap="onTagToggle"
+      >{{item}}</view>
+    </view>
+    <view class="tag-group-label">场景</view>
+    <view class="tags">
+      <view
+        wx:for="{{sceneTags}}"
+        wx:key="*this"
+        class="chip {{tagMap[item] ? 'on' : ''}}"
+        data-tag="{{item}}"
+        bindtap="onTagToggle"
+      >{{item}}</view>
+    </view>
+  </view>
+
+  <!-- 公开设置 -->
+  <view class="section row-between">
+    <view>
+      <view class="section-title inline">公开菜谱</view>
+      <view class="section-sub">公开后其他人可以看到并做这道菜</view>
+    </view>
+    <switch checked="{{form.isPublic}}" color="#FF6B35" bindchange="onPublicChange" />
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 底部保存 -->
+  <view class="footer">
+    <view class="btn-primary {{saving ? 'disabled' : ''}}" bindtap="submit">{{saving ? '保存中...' : (isEdit ? '保存修改' : '发布菜谱')}}</view>
+  </view>
+</view>

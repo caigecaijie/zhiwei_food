@@ -1,0 +1,548 @@
+/** dinner-party 页面样式 */
+.page {
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+/* ============ hub ============ */
+.hero {
+  padding: 48rpx 32rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.hero-icon {
+  font-size: 88rpx;
+}
+
+.hero-title {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.hero-sub {
+  font-size: 24rpx;
+  color: var(--text-sub);
+  margin-bottom: 16rpx;
+  line-height: 1.6;
+}
+
+.hero .btn-primary,
+.hero-btn {
+  width: 100%;
+  border: none;
+  border-radius: 999rpx;
+  padding: 18rpx 0;
+  font-size: 30rpx;
+  font-weight: 600;
+  background: var(--primary);
+  color: #fff;
+  line-height: inherit;
+}
+
+.hero-btn::after {
+  border: none;
+}
+
+.join-row {
+  margin-top: 16rpx;
+  display: flex;
+  gap: 16rpx;
+  width: 100%;
+}
+
+.join-input {
+  flex: 1;
+  background: var(--bg);
+  border-radius: 999rpx;
+  padding: 14rpx 28rpx;
+  font-size: 28rpx;
+  text-align: center;
+  letter-spacing: 4rpx;
+}
+
+.join-btn {
+  width: 160rpx;
+}
+
+.party-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.party-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx;
+}
+
+.party-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.party-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.party-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.party-status {
+  flex-shrink: 0;
+  font-size: 22rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+.party-status.ordered {
+  background: #E8F3FF;
+  color: #1E80FF;
+}
+
+.party-status.closed {
+  background: #F0F0F0;
+  color: var(--text-sub);
+}
+
+.party-meta {
+  margin-top: 12rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+  font-size: 22rpx;
+  color: var(--text-sub);
+}
+
+.arrow {
+  color: #ccc;
+  font-size: 36rpx;
+  margin-left: 12rpx;
+}
+
+/* ============ room ============ */
+.room-head {
+  padding: 28rpx;
+}
+
+.room-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+}
+
+.room-title {
+  font-size: 36rpx;
+  font-weight: 700;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.code-row {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  background: var(--primary-light);
+  border-radius: 12rpx;
+  padding: 16rpx 20rpx;
+}
+
+.code-label {
+  font-size: 24rpx;
+  color: var(--text-sub);
+}
+
+.code {
+  font-size: 40rpx;
+  font-weight: 700;
+  letter-spacing: 8rpx;
+  color: var(--primary);
+}
+
+.copy-tip {
+  margin-left: auto;
+  font-size: 22rpx;
+  color: var(--primary);
+}
+
+.share-btn-plain {
+  margin-top: 20rpx;
+  width: 100%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 28rpx;
+  border-radius: 999rpx;
+  padding: 14rpx 0;
+  line-height: inherit;
+}
+
+.share-btn-plain::after {
+  border: none;
+}
+
+.members {
+  margin-top: 24rpx;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20rpx;
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  width: 96rpx;
+}
+
+.member-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: #f0f0f0;
+}
+
+.member-name {
+  font-size: 20rpx;
+  color: var(--text-sub);
+  max-width: 96rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-banner {
+  margin-top: 20rpx;
+  background: #E8F8EF;
+  color: var(--success);
+  font-size: 26rpx;
+  border-radius: 12rpx;
+  padding: 18rpx 24rpx;
+}
+
+.status-banner.gray {
+  background: #F0F0F0;
+  color: var(--text-sub);
+}
+
+/* 分组菜品 */
+.groups {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.group {
+  padding: 20rpx;
+}
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 2rpx solid #F5F5F5;
+}
+
+.group-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: #f0f0f0;
+}
+
+.group-name {
+  font-size: 26rpx;
+  font-weight: 600;
+  color: var(--primary);
+  flex: 1;
+}
+
+.group-count {
+  font-size: 22rpx;
+  color: var(--text-sub);
+}
+
+.group-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 0;
+  border-bottom: 2rpx solid #F8F8F8;
+}
+
+.group-item:last-child {
+  border-bottom: none;
+}
+
+.dish-cover {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 10rpx;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.dish-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.dish-title {
+  font-size: 28rpx;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dish-remark {
+  font-size: 22rpx;
+  color: var(--text-sub);
+}
+
+.dish-del {
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-sub);
+  font-size: 26rpx;
+  flex-shrink: 0;
+}
+
+/* 底部操作 */
+.bottom-space {
+  height: 150rpx;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 20rpx;
+  padding: 16rpx 32rpx calc(16rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.04);
+  z-index: 10;
+}
+
+.add-dish-btn {
+  flex: 1;
+}
+
+.order-btn {
+  flex: 1.4;
+}
+
+.close-party-btn {
+  flex: 1;
+}
+
+.close-btn {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 28rpx;
+  font-size: 26rpx;
+  color: var(--text-sub);
+}
+
+/* 加菜弹层 */
+.mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+}
+
+.picker-panel {
+  width: 100%;
+  max-height: 75vh;
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  display: flex;
+  flex-direction: column;
+  padding: 28rpx 28rpx calc(20rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.picker-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.picker-title {
+  font-size: 32rpx;
+  font-weight: 600;
+}
+
+.picker-close {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-sub);
+  font-size: 30rpx;
+}
+
+.picker-search {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+
+.picker-input {
+  flex: 1;
+  background: var(--bg);
+  border-radius: 999rpx;
+  padding: 14rpx 28rpx;
+  font-size: 26rpx;
+}
+
+.picker-search-btn {
+  font-size: 26rpx;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  padding: 0 12rpx;
+}
+
+.picker-list {
+  max-height: 55vh;
+}
+
+.picker-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 0;
+  border-bottom: 2rpx solid #F8F8F8;
+}
+
+.picker-item:last-child {
+  border-bottom: none;
+}
+
+.picker-cover {
+  width: 88rpx;
+  height: 88rpx;
+  border-radius: 10rpx;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.picker-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6rpx;
+}
+
+.picker-name {
+  font-size: 28rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.picker-meta {
+  font-size: 22rpx;
+  color: var(--text-sub);
+}
+
+.picker-add {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* 分享引导弹窗 */
+.share-guide-panel {
+  width: 100%;
+  max-height: 60vh;
+  background: #fff;
+  border-radius: 24rpx 24rpx 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 32rpx calc(32rpx + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.share-guide-icon {
+  font-size: 100rpx;
+  margin-bottom: 16rpx;
+}
+
+.share-guide-title {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.share-guide-sub {
+  font-size: 28rpx;
+  color: var(--text-sub);
+  margin-top: 12rpx;
+  margin-bottom: 32rpx;
+}
+
+.share-guide-btn {
+  width: 100%;
+  border: none;
+  border-radius: 999rpx;
+  padding: 24rpx 0;
+  font-size: 32rpx;
+  font-weight: 600;
+  background: var(--primary);
+  color: #fff;
+  line-height: inherit;
+}
+
+.share-guide-btn::after {
+  border: none;
+}
+
+.share-guide-skip {
+  margin-top: 24rpx;
+  font-size: 26rpx;
+  color: var(--text-sub);
+}

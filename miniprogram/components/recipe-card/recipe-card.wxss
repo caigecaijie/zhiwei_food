@@ -1,0 +1,96 @@
+.rc-card {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+
+.rc-cover {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: #FFF1E8;
+}
+
+.rc-img {
+  width: 100%;
+  height: 100%;
+}
+
+.rc-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64rpx;
+}
+
+.rc-body {
+  flex: 1;
+  margin-left: 20rpx;
+  overflow: hidden;
+}
+
+.rc-title {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #333;
+}
+
+.rc-desc {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 8rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rc-meta {
+  display: flex;
+  margin-top: 10rpx;
+}
+
+.rc-meta-item {
+  font-size: 22rpx;
+  color: #999;
+  margin-right: 20rpx;
+}
+
+.rc-tags {
+  margin-top: 10rpx;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.rc-tag {
+  display: inline-block;
+  font-size: 20rpx;
+  color: #FF6B35;
+  background: #FFF1E8;
+  border-radius: 6rpx;
+  padding: 2rpx 10rpx;
+  margin-right: 10rpx;
+  margin-bottom: 6rpx;
+}
+
+.rc-add {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: #FF6B35;
+  color: #fff;
+  font-size: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-left: 12rpx;
+  line-height: 1;
+}

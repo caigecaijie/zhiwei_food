@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "厨房",
+  "usingComponents": {
+    "recipe-card": "../../components/recipe-card/recipe-card",
+    "empty-state": "../../components/empty-state/empty-state"
+  }
+}

@@ -1,0 +1,397 @@
+/** recipe-edit 页面样式 */
+.page {
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.section {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.section-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin: 0 0 20rpx;
+  color: var(--text-main);
+}
+
+.section-title.inline {
+  margin-bottom: 6rpx;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section-header .section-title {
+  margin-bottom: 20rpx;
+}
+
+.section-sub {
+  font-size: 22rpx;
+  color: var(--text-sub);
+}
+
+.add-row {
+  font-size: 26rpx;
+  color: var(--primary);
+  padding: 8rpx 0;
+}
+
+.row-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 封面 */
+.cover-box {
+  position: relative;
+  width: 100%;
+  height: 340rpx;
+}
+
+.cover-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.cover-add {
+  width: 100%;
+  height: 100%;
+  border: 2rpx dashed #ddd;
+  border-radius: 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12rpx;
+  color: var(--text-sub);
+  font-size: 26rpx;
+  box-sizing: border-box;
+}
+
+.cover-add-icon {
+  font-size: 60rpx;
+}
+
+.cover-del {
+  position: absolute;
+  top: 12rpx;
+  right: 12rpx;
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 表单字段 */
+.field {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+}
+
+.field.col {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12rpx;
+}
+
+.field-label {
+  font-size: 28rpx;
+  color: var(--text-main);
+  width: 110rpx;
+  flex-shrink: 0;
+}
+
+.field.col .field-label {
+  width: auto;
+}
+
+.field-input {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.field-value {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.field-value.placeholder {
+  color: #bbb;
+}
+
+.picker-arrow {
+  font-size: 36rpx;
+  color: #C0C4CC;
+  margin-left: 12rpx;
+}
+
+/* 分类选择器 */
+.category-picker {
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #F5F5F5;
+}
+
+/* 两列信息 */
+.row-2 {
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 0;
+}
+
+/* 三列信息 */
+.row-3 {
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 0;
+}
+
+.cell {
+  flex: 1;
+  background: var(--bg);
+  border-radius: 12rpx;
+  padding: 14rpx 16rpx;
+  box-sizing: border-box;
+}
+
+.cell-label {
+  font-size: 22rpx;
+  color: var(--text-sub);
+  margin-bottom: 8rpx;
+}
+
+.cell-value {
+  font-size: 26rpx;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell-value.placeholder {
+  color: #bbb;
+}
+
+.cell-input {
+  font-size: 26rpx;
+}
+
+/* 难度星星 */
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.star {
+  font-size: 44rpx;
+  color: #ddd;
+  padding: 0 6rpx;
+}
+
+.star.on {
+  color: #FFB800;
+}
+
+.difficulty-label {
+  margin-left: 12rpx;
+  font-size: 26rpx;
+  color: var(--primary);
+}
+
+/* 食材行 */
+.ing-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 12rpx 0;
+  border-bottom: 2rpx solid #F5F5F5;
+}
+
+.ing-row:last-child {
+  border-bottom: none;
+}
+
+.ing-name {
+  flex: 1.2;
+  font-size: 28rpx;
+}
+
+.ing-amount {
+  flex: 1;
+  font-size: 28rpx;
+}
+
+.ing-unit {
+  width: 130rpx;
+}
+
+.unit-value {
+  font-size: 26rpx;
+  color: var(--text-main);
+  background: var(--bg);
+  border-radius: 8rpx;
+  padding: 10rpx 12rpx;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unit-value.placeholder {
+  color: #bbb;
+}
+
+.row-del {
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-sub);
+  font-size: 28rpx;
+  flex-shrink: 0;
+}
+
+/* 步骤行 */
+.step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 16rpx;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #F5F5F5;
+}
+
+.step-row:last-child {
+  border-bottom: none;
+}
+
+.step-no {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 4rpx;
+}
+
+.step-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14rpx;
+}
+
+.step-text {
+  width: 100%;
+  font-size: 28rpx;
+  min-height: 60rpx;
+  line-height: 1.6;
+}
+
+.step-img-box {
+  position: relative;
+  width: 240rpx;
+  height: 180rpx;
+}
+
+.step-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 12rpx;
+}
+
+.step-img-del {
+  position: absolute;
+  top: -12rpx;
+  right: -12rpx;
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-img-add {
+  width: 240rpx;
+  height: 72rpx;
+  border: 2rpx dashed #ddd;
+  border-radius: 12rpx;
+  font-size: 24rpx;
+  color: var(--text-sub);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+/* 标签 */
+.tag-group-label {
+  font-size: 24rpx;
+  color: var(--text-sub);
+  margin: 12rpx 0 14rpx;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.chip {
+  font-size: 26rpx;
+  padding: 10rpx 26rpx;
+  border-radius: 999rpx;
+  background: var(--bg);
+  color: var(--text-main);
+}
+
+.chip.on {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* 底部 */
+.bottom-space {
+  height: 140rpx;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 16rpx 32rpx calc(16rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.04);
+  z-index: 10;
+}

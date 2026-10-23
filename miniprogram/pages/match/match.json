@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "按食材配菜",
+  "usingComponents": {
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

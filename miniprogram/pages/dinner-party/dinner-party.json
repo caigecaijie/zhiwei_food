@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "饭局点菜",
+  "usingComponents": {
+    "empty-state": "/components/empty-state/empty-state"
+  }
+}

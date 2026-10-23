@@ -1,0 +1,42 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="loading-tip">加载中...</view>
+
+  <empty-state wx:elif="{{items.length === 0}}" icon="🛒" text="购物车还是空的\n回厨房挑几道菜吧" />
+
+  <view wx:else class="list">
+    <view class="item card" wx:for="{{items}}" wx:key="_id">
+      <image class="cover" src="{{item.recipeCover}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="info">
+        <view class="title-row">
+          <text class="title">{{item.recipeTitle}}</text>
+          <view class="del" data-idx="{{index}}" bindtap="onRemove">✕</view>
+        </view>
+        <input
+          class="remark"
+          placeholder="备注：少辣 / 多放香菜..."
+          value="{{item.remark}}"
+          data-idx="{{index}}"
+          bindblur="onRemarkBlur"
+          maxlength="50"
+        />
+        <view class="qty-row">
+          <view class="stepper">
+            <view class="step-btn {{item.quantity <= 1 ? 'disabled' : ''}}" data-idx="{{index}}" data-delta="-1" bindtap="changeQuantity">－</view>
+            <text class="qty">{{item.quantity}}</text>
+            <view class="step-btn" data-idx="{{index}}" data-delta="1" bindtap="changeQuantity">＋</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 底部提交栏 -->
+  <view wx:if="{{items.length > 0}}" class="footer">
+    <view class="total">共 <text class="num">{{totalCount}}</text> 份</view>
+    <view class="btn-primary submit-btn {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">
+      {{submitting ? '提交中...' : '提交订单'}}
+    </view>
+  </view>
+</view>

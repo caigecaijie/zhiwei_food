@@ -1,0 +1,53 @@
+<view class="page">
+  <!-- 状态筛选 -->
+  <view class="tabs">
+    <view
+      class="tab {{activeTab === item.key ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onTabTap"
+    >{{item.label}}</view>
+  </view>
+
+  <!-- 空状态 -->
+  <view wx:if="{{orders.length === 0 && !loading}}" class="empty-wrap">
+    <empty-state icon="📋" text="暂无订单\n去厨房点几道菜吧" />
+    <view class="btn-primary go-btn" bindtap="goKitchen">去点菜</view>
+  </view>
+
+  <!-- 订单列表 -->
+  <view class="orders">
+    <view class="order card" wx:for="{{orders}}" wx:key="_id" data-id="{{item._id}}" bindtap="onOrderTap">
+      <view class="order-head">
+        <text class="order-no">单号 {{item.orderNo}}</text>
+        <text class="order-status" style="color: {{item.statusColor}}">{{item.statusText}}</text>
+      </view>
+      <view class="order-body">
+        <view class="covers">
+          <block wx:if="{{item.previewCovers.length > 0}}">
+            <image
+              wx:for="{{item.previewCovers}}"
+              wx:for-item="url"
+              wx:key="*this"
+              class="cover"
+              src="{{url}}"
+              mode="aspectFill"
+              lazy-load="{{true}}"
+            />
+          </block>
+          <view wx:else class="cover cover-fallback">🍳</view>
+          <view wx:if="{{item.items.length > 3}}" class="cover more">+{{item.items.length - 3}}</view>
+        </view>
+        <view class="order-meta">
+          <text class="count">共 {{item.totalCount}} 份</text>
+          <text class="time">{{item.timeText}}</text>
+        </view>
+      </view>
+      <view wx:if="{{item.partyId}}" class="party-flag">🍻 饭局订单</view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading-tip">加载中...</view>
+  <view wx:elif="{{orders.length > 0 && !hasMore}}" class="loading-tip">— 没有更多了 —</view>
+</view>

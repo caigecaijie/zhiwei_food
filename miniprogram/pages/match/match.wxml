@@ -1,0 +1,74 @@
+<view class="page">
+  <!-- 食材选择卡 -->
+  <view class="card input-card">
+    <view class="section-title">已选食材</view>
+    <view class="selected-chips" wx:if="{{selected.length > 0}}">
+      <view
+        class="chip chip-selected"
+        wx:for="{{selected}}"
+        wx:key="*this"
+        data-name="{{item}}"
+        bindtap="onRemoveIngredient"
+      >{{item}} ✕</view>
+      <view class="chip chip-clear" bindtap="onClear">清空</view>
+    </view>
+    <view class="selected-empty" wx:else>还没有添加食材，输入或从下面点选吧</view>
+
+    <view class="input-row">
+      <input
+        class="ing-input"
+        placeholder="输入食材名，如：番茄"
+        value="{{inputValue}}"
+        confirm-type="done"
+        bindinput="onInput"
+        bindconfirm="onAdd"
+      />
+      <button class="add-btn" bindtap="onAdd">添加</button>
+    </view>
+
+    <view class="common-title">常用食材</view>
+    <view class="chips">
+      <view
+        class="chip {{item.selected ? 'chip-active' : ''}}"
+        wx:for="{{commonIngredients}}"
+        wx:key="name"
+        data-name="{{item.name}}"
+        bindtap="onQuickTap"
+      >{{item.name}}</view>
+    </view>
+  </view>
+
+  <!-- 匹配按钮 -->
+  <button
+    class="btn-primary match-btn {{selected.length === 0 ? 'disabled' : ''}}"
+    bindtap="onMatch"
+    disabled="{{loading}}"
+  >开始配菜</button>
+
+  <!-- 匹配结果 -->
+  <view class="result-section" wx:if="{{searched}}">
+    <view class="section-title" wx:if="{{results.length > 0}}">为你找到 {{results.length}} 道菜</view>
+    <view
+      class="card result-item"
+      wx:for="{{results}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="onResultTap"
+      hover-class="item-hover"
+    >
+      <image class="cover" src="{{item.cover}}" mode="aspectFill" />
+      <view class="info">
+        <view class="title">{{item.title}}</view>
+        <view class="match-line">
+          <text class="match-num">匹配 {{item.matchCount}}/{{item.totalCount}}</text> 种食材
+        </view>
+        <view class="missing" wx:if="{{item.missingText}}">还缺：{{item.missingText}}</view>
+        <view class="meta">{{item.metaText}}</view>
+      </view>
+    </view>
+    <empty-state wx:if="{{results.length === 0 && !loading}}" icon="🥕" text="没有找到匹配的菜谱，换个食材试试" />
+  </view>
+
+  <view class="loading-tip" wx:if="{{loading}}">正在为你挑选合适的菜谱…</view>
+  <view class="bottom-space"></view>
+</view>

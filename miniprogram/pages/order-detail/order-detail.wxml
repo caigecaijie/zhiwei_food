@@ -1,0 +1,52 @@
+<view class="page" wx:if="{{order}}">
+  <!-- 状态头部 -->
+  <view class="status-head" style="background: {{order.statusColor}};">
+    <view class="status-text">{{order.statusText}}</view>
+    <view class="order-no">单号 {{order.orderNo}}</view>
+    <view wx:if="{{order.timeText}}" class="time">{{order.timeText}}</view>
+  </view>
+
+  <!-- 饭局标识 -->
+  <view wx:if="{{order.partyId}}" class="card block party-line">
+    <text>🍻 饭局订单 · {{order.participants.length}} 人参与</text>
+  </view>
+
+  <!-- 菜品清单 -->
+  <view class="card block">
+    <view class="block-title">菜品清单（{{order.totalCount}} 份）</view>
+    <view class="item" wx:for="{{order.items}}" wx:key="recipeId">
+      <image class="cover" src="{{item.cover}}" mode="aspectFill" lazy-load="{{true}}" />
+      <view class="info">
+        <text class="name">{{item.title}}</text>
+        <text wx:if="{{item.remark}}" class="remark">📝 {{item.remark}}</text>
+        <text wx:if="{{item.addedByName}}" class="from">来自：{{item.addedByName}}</text>
+      </view>
+      <text class="qty">× {{item.quantity}}</text>
+    </view>
+  </view>
+
+  <!-- 参与者 -->
+  <view wx:if="{{order.partyId && order.participants.length}}" class="card block">
+    <view class="block-title">参与好友</view>
+    <view class="participants">
+      <text class="p-chip" wx:for="{{order.participants}}" wx:key="*this">👤 {{item}}</text>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 创建者操作 -->
+  <view wx:if="{{isCreator && order.status === 'pending'}}" class="footer">
+    <view class="btn-plain cancel-btn" bindtap="cancelOrder">取消订单</view>
+    <view class="btn-primary cook-btn {{updating ? 'disabled' : ''}}" bindtap="startCooking">开始制作</view>
+  </view>
+  <view wx:elif="{{isCreator && order.status === 'cooking'}}" class="footer">
+    <view class="btn-primary {{updating ? 'disabled' : ''}}" bindtap="finish">完成订单</view>
+  </view>
+</view>
+
+<view wx:elif="{{loading}}" class="loading-tip">加载中...</view>
+
+<view wx:else class="fail-wrap">
+  <empty-state text="订单不存在" />
+</view>

@@ -1,0 +1,9 @@
+{
+  "name": "recipeCRUD",
+  "version": "1.0.0",
+  "description": "菜谱与分类增删改查",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}

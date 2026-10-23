@@ -1,0 +1,31 @@
+# 依赖
+node_modules/
+cloudfunctions/*/node_modules/
+
+# 个人/本地配置（不同开发者不同，不入库）
+project.private.config.json
+miniprogram/config.ts
+
+# 环境变量与密钥
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.keystore
+*.jks
+secrets/
+credentials.json
+
+# 云开发本地调试产物
+cloudfunctions/*/config.json.local
+miniprogram_npm/
+.miniprogram/
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+*.local

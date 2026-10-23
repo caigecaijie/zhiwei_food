@@ -1,0 +1,41 @@
+<view class="page">
+  <!-- 新增分类 -->
+  <view class="add-bar">
+    <input
+      class="add-input"
+      placeholder="输入分类名，如：我家的家常菜"
+      value="{{newName}}"
+      bindinput="onNameInput"
+      bindconfirm="onAdd"
+      confirm-type="done"
+    />
+    <view class="add-btn" bindtap="onAdd">添加</view>
+  </view>
+
+  <!-- 分类列表 -->
+  <view wx:if="{{categories.length === 0}}" class="empty-tip">还没有自定义分类，先添加一个吧</view>
+  <view class="cat-list" wx:else>
+    <view class="cat-item" wx:for="{{categories}}" wx:key="_id">
+      <view class="cat-info">
+        <text class="cat-name">{{item.name}}</text>
+        <text class="cat-count">{{item.recipeCount || 0}} 道菜</text>
+      </view>
+      <view class="cat-actions">
+        <view
+          class="act {{index === 0 ? 'disabled' : ''}}"
+          data-index="{{index}}"
+          data-dir="up"
+          bindtap="onMove"
+        >↑</view>
+        <view
+          class="act {{index === categories.length - 1 ? 'disabled' : ''}}"
+          data-index="{{index}}"
+          data-dir="down"
+          bindtap="onMove"
+        >↓</view>
+        <view class="act" data-id="{{item._id}}" data-name="{{item.name}}" bindtap="onRename">编辑</view>
+        <view class="act danger" data-id="{{item._id}}" data-name="{{item.name}}" bindtap="onDelete">删除</view>
+      </view>
+    </view>
+  </view>
+</view>

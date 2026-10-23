@@ -1,0 +1,72 @@
+<view class="page" wx:if="{{recipe}}">
+  <!-- 封面 -->
+  <image wx:if="{{recipe.coverImage}}" class="cover" src="{{recipe.coverImage}}" mode="aspectFill" />
+  <view wx:else class="cover cover-placeholder">🍳</view>
+
+  <!-- 头部信息 -->
+  <view class="head card">
+    <view class="title-row">
+      <text class="title">{{recipe.title}}</text>
+      <text class="tag {{recipe.isPublic ? '' : 'private'}}">{{recipe.isPublic ? '公开' : '私密'}}</text>
+    </view>
+    <view wx:if="{{recipe.description}}" class="desc">{{recipe.description}}</view>
+    <view class="meta">
+      <text class="meta-item">难度：{{difficultyLabel || '未知'}}</text>
+      <text wx:if="{{recipe.cookTime}}" class="meta-item">用时：{{recipe.cookTime}} 分钟</text>
+      <text wx:if="{{recipe.servings}}" class="meta-item">{{recipe.servings}} 人份</text>
+    </view>
+    <view wx:if="{{recipe.tags.length}}" class="tags">
+      <text class="tag" wx:for="{{recipe.tags}}" wx:key="*this">{{item}}</text>
+    </view>
+    <view wx:if="{{recipe.author}}" class="author">
+      <image class="avatar" src="{{recipe.author.avatarUrl}}" mode="aspectFill" />
+      <text class="author-name">{{recipe.author.nickName}}</text>
+    </view>
+    <view wx:if="{{isCreator}}" class="creator-ops">
+      <view class="op-btn" bindtap="onEdit">✏️ 编辑</view>
+      <view class="op-btn danger" bindtap="onDelete">🗑️ 删除</view>
+    </view>
+  </view>
+
+  <!-- 食材清单 -->
+  <view wx:if="{{recipe.ingredients.length}}" class="card block">
+    <view class="block-title">🥬 食材清单</view>
+    <view class="ing-row" wx:for="{{recipe.ingredients}}" wx:key="name">
+      <text class="ing-name">{{item.name}}</text>
+      <text class="ing-amount">{{item.amount}}{{item.unit}}</text>
+    </view>
+  </view>
+
+  <!-- 制作步骤 -->
+  <view wx:if="{{recipe.steps.length}}" class="card block">
+    <view class="block-title">👨‍🍳 制作步骤</view>
+    <view class="step" wx:for="{{recipe.steps}}" wx:key="order">
+      <view class="step-no">{{item.order}}</view>
+      <view class="step-body">
+        <text class="step-text">{{item.text}}</text>
+        <image wx:if="{{item.image}}" class="step-img" src="{{item.image}}" mode="widthFix" lazy-load="{{true}}" />
+      </view>
+    </view>
+  </view>
+
+  <!-- 小贴士 -->
+  <view wx:if="{{recipe.tips}}" class="card block">
+    <view class="block-title">💡 小贴士</view>
+    <text class="tips">{{recipe.tips}}</text>
+  </view>
+
+  <view class="bottom-space"></view>
+
+  <!-- 底部操作 -->
+  <view class="footer">
+    <button class="btn-plain share-btn" open-type="share">分享</button>
+    <view class="btn-primary cart-btn" bindtap="onAddCart">加入购物车</view>
+  </view>
+</view>
+
+<view wx:elif="{{loading}}" class="loading-tip">加载中...</view>
+
+<view wx:else class="fail-wrap">
+  <empty-state text="菜谱不存在或已删除" />
+  <view class="btn-plain retry-btn" bindtap="onRetry">重新加载</view>
+</view>

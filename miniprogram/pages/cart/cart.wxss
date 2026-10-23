@@ -1,0 +1,136 @@
+/** cart 页面样式 */
+.page {
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+}
+
+.item {
+  display: flex;
+  gap: 20rpx;
+  padding: 20rpx;
+}
+
+.cover {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  background: #f0f0f0;
+  flex-shrink: 0;
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 30rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.del {
+  width: 44rpx;
+  height: 44rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-sub);
+  font-size: 28rpx;
+  flex-shrink: 0;
+}
+
+.remark {
+  font-size: 24rpx;
+  color: var(--text-sub);
+  background: var(--bg);
+  border-radius: 8rpx;
+  padding: 8rpx 14rpx;
+  width: auto;
+}
+
+.qty-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 4rpx;
+}
+
+.step-btn {
+  width: 52rpx;
+  height: 52rpx;
+  border-radius: 8rpx;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-btn.disabled {
+  opacity: 0.4;
+}
+
+.qty {
+  min-width: 64rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+/* 底部 */
+.bottom-space {
+  height: 140rpx;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 16rpx 32rpx calc(16rpx + env(safe-area-inset-bottom));
+  background: #fff;
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.04);
+  z-index: 10;
+}
+
+.total {
+  flex: 1;
+  font-size: 28rpx;
+  color: var(--text-main);
+}
+
+.num {
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 34rpx;
+}
+
+.submit-btn {
+  width: 280rpx;
+}

@@ -1,0 +1,83 @@
+<view class="page">
+  <!-- 顶部搜索 + 配菜入口 -->
+  <view class="topbar">
+    <view class="search-box">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索菜名 / 食材"
+        value="{{keyword}}"
+        bindinput="onKeywordInput"
+        bindconfirm="onSearch"
+        confirm-type="search"
+      />
+    </view>
+    <view class="match-entry" bindtap="goMatch">
+      <text class="match-icon">🥗</text>
+      <text>配菜</text>
+    </view>
+  </view>
+
+  <!-- 全部 / 我的 筛选 -->
+  <view class="filter-bar">
+    <view class="filter-item {{filter === 'all' ? 'active' : ''}}" data-filter="all" bindtap="setFilter">全部菜谱</view>
+    <view class="filter-item {{filter === 'mine' ? 'active' : ''}}" data-filter="mine" bindtap="setFilter">我的菜谱</view>
+  </view>
+
+  <view class="main">
+    <!-- 左侧分类 -->
+    <scroll-view class="sidebar" scroll-y>
+      <view
+        class="side-item {{activeCategoryId === 'all' ? 'active' : ''}}"
+        data-id="all"
+        bindtap="onCategoryTap"
+      >全部</view>
+      <view
+        class="side-item {{activeCategoryId === item._id ? 'active' : ''}}"
+        wx:for="{{categories}}"
+        wx:key="_id"
+        data-id="{{item._id}}"
+        bindtap="onCategoryTap"
+      >{{item.name}}</view>
+      <view class="side-item manage" bindtap="goCategoryManage">⚙️ 管理</view>
+    </scroll-view>
+
+    <!-- 右侧菜谱列表 -->
+    <scroll-view class="list" scroll-y>
+      <view wx:if="{{loading}}" class="loading-tip">加载中...</view>
+      <empty-state wx:elif="{{recipes.length === 0}}" text="还没有菜谱\n点击右下角 + 创建第一道菜" />
+      <view wx:else class="recipe-list">
+        <recipe-card
+          wx:for="{{recipes}}"
+          wx:key="_id"
+          recipe="{{item}}"
+          show-add="{{true}}"
+          bindcardtap="onRecipeTap"
+          bindadd="onAddCart"
+        />
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 底部购物车栏 -->
+  <view class="bottombar">
+    <view class="cart-entry" bindtap="goCart">
+      <text class="cart-icon">🛒</text>
+      <view wx:if="{{cartCount > 0}}" class="badge">{{cartCount}}</view>
+    </view>
+    <view class="invite-btn" bindtap="goParty">邀请下单</view>
+  </view>
+
+  <!-- 添加菜谱悬浮按钮 -->
+  <view class="fab" bindtap="goRecipeEdit">＋</view>
+
+  <!-- 饭局分享弹窗 -->
+  <view wx:if="{{showPartyShare}}" class="mask" bindtap="closePartyShare">
+    <view class="share-panel" catchtap="noop">
+      <view class="share-title">🎉 饭局已创建</view>
+      <view class="share-desc">点击下方按钮，分享给好友一起点菜吧</view>
+      <button class="btn-primary share-btn" open-type="share" bindtap="closePartyShare">分享给好友</button>
+      <view class="share-cancel" bindtap="closePartyShare">稍后再说</view>
+    </view>
+  </view>
+</view>
